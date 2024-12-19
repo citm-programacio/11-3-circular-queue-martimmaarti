@@ -21,20 +21,17 @@ public:
         }
 
         _array[_back] = value;  // Insertar el valor en la posición de _back
-        _back = (_back + 1) % _capacity;  // Mover _back a la siguiente posición circular
+        _back++;  // Mover _back a la siguiente posición circular
         _size++;  // Incrementar el tamaño
     }
 
-    int dequeue() {
+    void dequeue() {
         if (empty()) {
             cout << "Queue is empty. Cannot dequeue.\n";
-            return -1;  // Indicamos que no hay elementos
         }
 
-        int value = _array[_front];  // Obtener el valor en la posición _front
         _front = (_front + 1) % _capacity;  // Mover _front a la siguiente posición circular
         _size--;  // Decrementar el tamaño
-        return value;
     }
 
     int size() const {
@@ -55,7 +52,7 @@ public:
         int index = _front;
         for (int i = 0; i < _size; ++i) {
             cout << _array[index] << " ";
-            index = (index + 1) % _capacity;  // Avanzar circularmente
+            index++;  // Avanzar circularmente
         }
         cout << endl;
     }
@@ -68,7 +65,7 @@ private:
     int _size;
 
     void resize() {
-        int newCapacity = _capacity * 2;  // Duplicar la capacidad
+        int newCapacity = _capacity +1;  // Duplicar la capacidad
         int* newArray = new int[newCapacity];
 
         // Copiar los elementos existentes
